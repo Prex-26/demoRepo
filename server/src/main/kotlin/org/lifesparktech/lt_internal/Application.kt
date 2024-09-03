@@ -1,6 +1,5 @@
 package org.lifesparktech.lt_internal
 
-import Payment
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
@@ -37,25 +36,8 @@ fun Application.module() {
             var collection = db.collection("new_orders").whereEqualTo("status", "captured").get().get().documents
             var data = mutableListOf<Payment>()
             collection.toList().forEach {
-                var x = it.data.toMap()
-                val payment = Payment(
-                    amount = x["amount"] as Long,
-                    base_amount = x["base_amount"] as Long,
-                    contact = x["contact"] as String,
-                    created_at = x["created_at"] as Long,
-                    description = x["description"] as String?,
-                    email = x["email"] as String,
-                    fee = x["fee"] as Long,
-                    international = x["international"] as Boolean,
-                    invoice_id = x["invoice_id"] as String?,
-                    method = x["method"] as String,
-                    refund_status = x["refund_status"] as String?,
-                    reward = x["reward"] as String?,
-                    status = x["status"] as String,
-                    tax = x["tax"] as Long,
-                )
+                val payment = Payment.payment(it.data)
                 data.add(payment)
-
             }
             call.respond(data)
         }
