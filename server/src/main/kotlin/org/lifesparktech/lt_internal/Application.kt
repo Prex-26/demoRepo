@@ -1,16 +1,17 @@
 package org.lifesparktech.lt_internal
 
 import com.google.auth.oauth2.GoogleCredentials
-import com.google.cloud.firestore.DocumentReference
-import com.google.cloud.firestore.DocumentSnapshot
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.cloud.FirestoreClient
+import io.ktor.resources.Resource
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.resources.*
+import io.ktor.server.resources.Resources
 import io.ktor.server.response.respond
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
@@ -32,6 +33,8 @@ fun Application.module() {
             isLenient = true
         })
     }
+    install(Resources)
+
     routing {
         get("") {
 
@@ -43,5 +46,9 @@ fun Application.module() {
             }
             call.respond(data)
         }
+        get<Payment> { article ->
+            // Get all articles ...
+        }
+
     }
 }

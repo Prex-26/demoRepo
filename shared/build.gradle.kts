@@ -42,7 +42,9 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
-            // put your Multiplatform dependencies here
+            implementation(libs.ktor.client.core)
+            implementation("io.ktor:ktor-client-resources:3.0.0-beta-2")
+        // put your Multiplatform dependencies here
         }
     }
 }

@@ -27,8 +27,10 @@ dependencies {
     implementation(libs.ktor.server.netty)
     implementation("io.ktor:ktor-server-content-negotiation:${libs.versions.ktor}")
     implementation("io.ktor:ktor-serialization-kotlinx-json:${libs.versions.ktor}")
-    testImplementation(libs.ktor.server.tests)
-    testImplementation(libs.kotlin.test.junit)
+    implementation("io.ktor:ktor-server-resources:${libs.versions.ktor}")
+
+//    testImplementation(libs.ktor.server.tests)
+//    testImplementation(libs.kotlin.test.junit)
 
 }
 

@@ -2,7 +2,9 @@ package org.lifesparktech.lt_internal
 
 import kotlinx.serialization.Serializable
 import kotlin.collections.toMap
+import io.ktor.resources.Resource
 
+@Resource("/articles")
 @Serializable
 data class Payment
 (
