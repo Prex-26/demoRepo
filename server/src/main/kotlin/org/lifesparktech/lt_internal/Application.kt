@@ -1,6 +1,8 @@
 package org.lifesparktech.lt_internal
 
 import com.google.auth.oauth2.GoogleCredentials
+import com.google.cloud.firestore.DocumentReference
+import com.google.cloud.firestore.DocumentSnapshot
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.cloud.FirestoreClient
