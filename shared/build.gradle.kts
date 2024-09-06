@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization") version "2.0.20"
+
 }
 
 kotlin {
@@ -44,7 +45,7 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
             implementation(libs.ktor.client.core)
             implementation("io.ktor:ktor-client-resources:3.0.0-beta-2")
-        // put your Multiplatform dependencies here
+            implementation("io.ktor:ktor-client-cio:3.0.0-beta-2")
         }
     }
 }

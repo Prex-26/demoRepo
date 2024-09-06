@@ -36,7 +36,7 @@ fun Application.module() {
     install(Resources)
 
     routing {
-        get("") {
+        get("/orders") {
 
             var collection = db.collection("new_orders").whereEqualTo("status", "captured").get().get().documents
             var data = mutableListOf<Payment>()
@@ -46,9 +46,15 @@ fun Application.module() {
             }
             call.respond(data)
         }
-        get<Payment> { article ->
-            // Get all articles ...
-        }
+//        get<Payment> {
+//            var collection = db.collection("new_orders").whereEqualTo("status", "captured").get().get().documents
+//            var data = mutableListOf<Payment>()
+//            collection.toList().forEach {
+//                val payment = Payment.payment(it.data)
+//                data.add(payment)
+//            }
+//            call.respond(data)
+//        }
 
     }
 }

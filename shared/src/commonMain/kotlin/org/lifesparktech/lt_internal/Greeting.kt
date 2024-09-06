@@ -1,9 +1,18 @@
 package org.lifesparktech.lt_internal
 
-class Greeting {
-    private val platform = getPlatform()
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.resources.Resources
+import io.ktor.client.request.get
 
-    fun greet(): String {
-        return "Hello, ${platform.name}!"
+import io.ktor.client.statement.bodyAsText
+class Greeting {
+
+
+    suspend fun greeting(): String {
+         val client = HttpClient(){
+            install(Resources)
+        }
+        val response = client.get("https://google.com")
+        return response.bodyAsText()
     }
 }
