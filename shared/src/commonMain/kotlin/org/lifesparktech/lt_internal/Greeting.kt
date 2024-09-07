@@ -1,10 +1,12 @@
 package org.lifesparktech.lt_internal
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.resources.Resources
 import io.ktor.client.plugins.resources.*
+import io.ktor.client.request.get
 
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.URLProtocol
@@ -16,7 +18,7 @@ import kotlinx.serialization.json.Json
 class Greeting {
 
 
-    suspend fun greeting(): String {
+    suspend fun greeting(): List<Payment> {
          val client = HttpClient(){
              install(Resources)
              install(ContentNegotiation) {
@@ -25,25 +27,12 @@ class Greeting {
                      isLenient = true
                  })
              }
-             defaultRequest {
-                     host = "https://lt-internal.el.r.appspot.com"
-                     url { protocol = URLProtocol.HTTP }
-
-             }
         }
-        val response = client.get(Payment(
-            amount = 4,
-            base_amount = 4,
-            contact = "test",
-            created_at = 4,
-            email = "4",
-            fee = 4,
-            international = true,
-            method = "",
-            status = "",
-            tax = 4,
-            order_id = "TODO()"
-        ))
-        return response.bodyAsText()
+
+        var response=client.get("https://lt-internal.el.r.appspot.com/orders")
+//        println(response.bodyAsText())
+        val payments: List<Payment> = Json.decodeFromString(response.bodyAsText())
+
+        return payments;
     }
 }
