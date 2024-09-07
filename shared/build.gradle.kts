@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
@@ -9,11 +8,11 @@ plugins {
     alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization") version "2.0.20"
 
+
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
+    @OptIn(ExperimentalWasmDsl::class) wasmJs {
         browser {
             val projectDirPath = project.projectDir.path
             commonWebpackConfig {
@@ -26,26 +25,29 @@ kotlin {
             }
         }
     }
-    
+
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class) compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    
+
     jvm()
-    
+
     sourceSets {
-        commonMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
-            implementation(libs.ktor.client.core)
-            implementation("io.ktor:ktor-client-resources:3.0.0-beta-2")
+        jvmMain.dependencies {
             implementation("io.ktor:ktor-client-cio:3.0.0-beta-2")
+        }
+        commonMain.dependencies {
+            implementation(libs.ktor.client.core)
+            implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.0-beta-2")
+            implementation("io.ktor:ktor-client-content-negotiation:3.0.0-beta-2")
+            implementation("io.ktor:ktor-client-resources:3.0.0-beta-2")
+
         }
     }
 }

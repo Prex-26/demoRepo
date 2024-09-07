@@ -4,7 +4,6 @@ import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.cloud.FirestoreClient
-import io.ktor.resources.Resource
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -36,17 +35,8 @@ fun Application.module() {
     install(Resources)
 
     routing {
-        get("/orders") {
-
-            var collection = db.collection("new_orders").whereEqualTo("status", "captured").get().get().documents
-            var data = mutableListOf<Payment>()
-            collection.toList().forEach {
-                val payment = Payment.payment(it.data)
-                data.add(payment)
-            }
-            call.respond(data)
-        }
-//        get<Payment> {
+//        get("/orders") {
+//
 //            var collection = db.collection("new_orders").whereEqualTo("status", "captured").get().get().documents
 //            var data = mutableListOf<Payment>()
 //            collection.toList().forEach {
@@ -55,6 +45,15 @@ fun Application.module() {
 //            }
 //            call.respond(data)
 //        }
+        get<Payment> {
+            var collection = db.collection("new_orders").whereEqualTo("status", "captured").get().get().documents
+            var data = mutableListOf<Payment>()
+            collection.toList().forEach {
+                val payment = Payment.payment(it.data)
+                data.add(payment)
+            }
+            call.respond(data)
+        }
 
     }
 }
