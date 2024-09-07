@@ -59,6 +59,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+            implementation(compose.material3)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -70,6 +72,8 @@ kotlin {
             implementation(projects.shared)
         }
         desktopMain.dependencies {
+            implementation(compose.preview)
+            implementation("ch.qos.logback:logback-classic:1.4.7")
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
         }
