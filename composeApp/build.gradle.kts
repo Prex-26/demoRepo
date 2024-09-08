@@ -59,6 +59,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
             implementation(compose.material3)
             implementation(compose.runtime)
