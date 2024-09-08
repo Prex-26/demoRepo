@@ -1,2 +1,4 @@
 runtime: java21
 entrypoint: 'java -jar server-all.jar'
+env_variables:
+  ktor_mongo_uri: 'mongodb+srv://srijan:<1uQYPTiWxVIcB0Si>@cluster0.vi9km.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'

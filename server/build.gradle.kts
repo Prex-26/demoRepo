@@ -1,6 +1,6 @@
 import com.google.cloud.tools.gradle.appengine.appyaml.AppEngineAppYamlExtension
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
+var mongo_version="4.9.0"
 plugins {
     id("com.google.cloud.tools.appengine") version "latest.release"
     alias(libs.plugins.kotlinJvm)
@@ -28,7 +28,12 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:${libs.versions.ktor}")
     implementation("io.ktor:ktor-serialization-kotlinx-json:${libs.versions.ktor}")
     implementation("io.ktor:ktor-server-resources:${libs.versions.ktor}")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
+    implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.10.1")
+    implementation("org.mongodb:mongodb-driver-core:$mongo_version")
+    implementation("org.mongodb:mongodb-driver-sync:$mongo_version")
+    implementation("org.mongodb:bson:$mongo_version")
 //    testImplementation(libs.ktor.server.tests)
 //    testImplementation(libs.kotlin.test.junit)
 
