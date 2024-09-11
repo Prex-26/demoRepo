@@ -19,6 +19,7 @@ application {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-server-auth:${libs.versions.ktor}")
     implementation("com.google.firebase:firebase-admin:latest.release")
     implementation(kotlin("reflect"))
     implementation(projects.shared)
@@ -28,14 +29,17 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:${libs.versions.ktor}")
     implementation("io.ktor:ktor-serialization-kotlinx-json:${libs.versions.ktor}")
     implementation("io.ktor:ktor-server-resources:${libs.versions.ktor}")
+    implementation("io.ktor:ktor-client-content-negotiation:3.0.0-beta-2")
+
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.10.1")
     implementation("org.mongodb:mongodb-driver-core:$mongo_version")
     implementation("org.mongodb:mongodb-driver-sync:$mongo_version")
     implementation("org.mongodb:bson:$mongo_version")
-//    testImplementation(libs.ktor.server.tests)
-//    testImplementation(libs.kotlin.test.junit)
+
+    implementation("io.ktor:ktor-server-html-builder:${libs.versions.ktor}")
+    testImplementation(libs.kotlin.test.junit)
 
 }
 

@@ -15,37 +15,6 @@ import kotlinx.coroutines.runBlocking
 
 fun Application.configureDatabases() {
     val mongoDatabase = connectToMongoDB()
-//    val carService = CarService(mongoDatabase)
-//    routing {
-//        // Create car
-//        post("/cars") {
-//            val car = call.receive<Car>()
-//            val id = carService.create(car)
-//            call.respond(HttpStatusCode.Created, id)
-//        }
-//        // Read car
-//        get("/cars/{id}") {
-//            val id = call.parameters["id"] ?: throw IllegalArgumentException("No ID found")
-//            carService.read(id)?.let { car ->
-//                call.respond(car)
-//            } ?: call.respond(HttpStatusCode.NotFound)
-//        }
-//        // Update car
-//        put("/cars/{id}") {
-//            val id = call.parameters["id"] ?: throw IllegalArgumentException("No ID found")
-//            val car = call.receive<Car>()
-//            carService.update(id, car)?.let {
-//                call.respond(HttpStatusCode.OK)
-//            } ?: call.respond(HttpStatusCode.NotFound)
-//        }
-//        // Delete car
-//        delete("/cars/{id}") {
-//            val id = call.parameters["id"] ?: throw IllegalArgumentException("No ID found")
-//            carService.delete(id)?.let {
-//                call.respond(HttpStatusCode.OK)
-//            } ?: call.respond(HttpStatusCode.NotFound)
-//        }
-//    }
 }
 
 fun Application.connectToMongoDB(): MongoDatabase {
@@ -53,7 +22,7 @@ fun Application.connectToMongoDB(): MongoDatabase {
     val serverApi = ServerApi.builder()
         .version(ServerApiVersion.V1)
         .build()
-    val uri= System.getenv("mongo")
+    val uri= System.getenv("ktor_mongo_uri")
     println(uri)
     val mongoClientSettings = MongoClientSettings.builder()
         .applyConnectionString(ConnectionString(uri))
@@ -64,9 +33,9 @@ fun Application.connectToMongoDB(): MongoDatabase {
 
     val mongoClient = MongoClient.create(mongoClientSettings)
     val database = mongoClient.getDatabase("sample_mflix")
-    runBlocking{
-        database.createCollection("test")
-    }
+//    runBlocking{
+//        database.createCollection("testing")
+//    }
     monitor.subscribe(ApplicationStopped) {
         mongoClient.close()
     }
