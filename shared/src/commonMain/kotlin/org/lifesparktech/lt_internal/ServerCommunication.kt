@@ -19,22 +19,16 @@ import kotlinx.serialization.json.Json
 
 class ServerCommunication {
 
-    val client: HttpClient
-    init {
-        client= HttpClient(){
-            install(Resources)
-            install(ContentNegotiation) {
-                json(Json {
-                    prettyPrint = true
-                    isLenient = true
-                })
-            }
-            install(HttpCookies) {
-                storage = AcceptAllCookiesStorage()
-            }
+    val client: HttpClient = HttpClient(){
+        install(Resources)
+        install(ContentNegotiation) {
+            json(Json {
+                prettyPrint = true
+                isLenient = true
+            })
         }
-        suspend {
-            client.cookies("http://0.0.0.0:8080/")
+        install(HttpCookies) {
+            storage = AcceptAllCookiesStorage()
         }
     }
     suspend fun getOrders(): List<Payment> {
@@ -50,7 +44,4 @@ class ServerCommunication {
         println(response)
         return response
     }
-
-
-
 }

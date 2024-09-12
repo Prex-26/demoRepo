@@ -2,8 +2,9 @@ package org.lifesparktech.lt_internal
 
 class WasmPlatform: Platform {
     override val name: String = "Web with Kotlin/Wasm"
-    override fun executeCommand(command: String): String {
-        return "This cannot be performed on Web"
+    override suspend fun handleAuthentication() : String {
+        println("handleAuthentication")
+        return "hi"
     }
 }
 
