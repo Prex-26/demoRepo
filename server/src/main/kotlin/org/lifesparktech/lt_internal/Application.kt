@@ -4,7 +4,6 @@ import com.example.plugins.configureDatabases
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
-import io.ktor.server.html.respondHtml
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.resources.Resources
@@ -13,9 +12,6 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import io.ktor.server.sessions.Sessions
 import io.ktor.server.sessions.cookie
-import kotlinx.html.a
-import kotlinx.html.body
-import kotlinx.html.p
 import kotlinx.serialization.json.Json
 
 
