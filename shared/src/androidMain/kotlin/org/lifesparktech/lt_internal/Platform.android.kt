@@ -4,7 +4,7 @@ import android.os.Build
 
 class AndroidPlatform : Platform {
     override val name: String = "Android ${Build.VERSION.SDK_INT}"
-    override fun executeCommand(command: String): String {
+    fun executeCommand(command: String): String {
 //        val process = Runtime.getRuntime().exec(command)
 //        process.waitFor()
         return "This cannot be performed on Android"

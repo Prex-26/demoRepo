@@ -13,19 +13,10 @@ import kotlinx.serialization.Serializable
 
 
 fun Application.configureAuthentication() {
-    HttpClient {
-        install(ContentNegotiation) {
-            json()
-        }
-    }
+
     routing {
         get("/login") {
             val session = call.sessions.get<UserSession>()
-            if (session == null) {
-                call.respondRedirect("/login.html")
-            } else {
-                call.respondRedirect("/home.html")
-            }
         }
     }
 }

@@ -1,6 +1,5 @@
 package org.lifesparktech.lt_internal
 
-import com.example.plugins.configureDatabases
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -20,7 +19,6 @@ fun main() {
 }
 
 fun Application.module() {
-
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = true
@@ -32,10 +30,11 @@ fun Application.module() {
     install(Sessions) {
         cookie<UserSession>("user_session")
     }
-    install(Resources)
 
+    install(Resources)
     routing {
         get("/") {
+
         }
         get("/home") {
             val userSession = getSession(call) ?: return@get
