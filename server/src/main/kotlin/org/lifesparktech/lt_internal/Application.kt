@@ -13,6 +13,8 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import kotlinx.coroutines.flow.toList
 import kotlinx.serialization.json.Json
+import org.bson.codecs.pojo.annotations.BsonId
+import org.bson.types.ObjectId
 
 
 fun main() {
@@ -30,10 +32,14 @@ fun Application.module() {
     configureAuthentication()
     install(Resources)
     routing {
-        get("/") {
+        get("/getOrders") {
             val collection= mongoDatabase.getCollection<RazorpayEvent>("razorpayEvents")
             val events= collection.find().toList()
-            call.respond(events.toString())
+            events.forEach { event->
+                if(event.status=="captured"&&event.amount>3000000){
+                    println("Email: ${event.email} Contact: ${event.contact} Amount: ${event.amount}")
+                }
+            }
 
         //            mongoDatabase.
         }
@@ -42,13 +48,10 @@ fun Application.module() {
 }
 
 data class RazorpayEvent(
-    val id: String,
-    val entity: String,
-    val account_id: String,
-    val event: String,
-    val version: String,
-    val event_id: String,
-    val event_time: Long,
-    val webhook_id: String,
-    val payload: Payload
+    @BsonId
+    val id: ObjectId,
+    val email: String,
+    val contact: String,
+    val status: String,
+    val amount: Long
 )
