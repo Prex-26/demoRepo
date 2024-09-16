@@ -27,24 +27,12 @@ fun Application.module() {
     }
     configureDatabases()
     configureAuthentication()
-    install(Sessions) {
-        cookie<UserSession>("user_session")
-    }
-
     install(Resources)
     routing {
         get("/") {
 
         }
-        get("/home") {
-            val userSession = getSession(call) ?: return@get
-            call.respondText("Hello, ${userSession.token}")
-        }
-        get("/user")
-        {
-            val userSession = getSession(call) ?: return@get
-            call.respondText("Hello, ${userSession.token}")
-        }
+
     }
 }
 
