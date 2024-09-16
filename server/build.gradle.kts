@@ -29,7 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:${libs.versions.ktor}")
     implementation("io.ktor:ktor-serialization-kotlinx-json:${libs.versions.ktor}")
     implementation("io.ktor:ktor-server-resources:${libs.versions.ktor}")
-    implementation("io.ktor:ktor-client-content-negotiation:3.0.0-beta-2")
+    implementation("io.ktor:ktor-client-content-negotiation:${libs.versions.ktor}")
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
@@ -37,6 +37,11 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-core:$mongo_version")
     implementation("org.mongodb:mongodb-driver-sync:$mongo_version")
     implementation("org.mongodb:bson:$mongo_version")
+
+    //Koin Dependency Injection
+    implementation("io.insert-koin:koin-ktor:3.5.3")
+    implementation("io.insert-koin:koin-logger-slf4j:3.5.3")
+
 
     implementation("io.ktor:ktor-server-html-builder:${libs.versions.ktor}")
     testImplementation(libs.kotlin.test.junit)

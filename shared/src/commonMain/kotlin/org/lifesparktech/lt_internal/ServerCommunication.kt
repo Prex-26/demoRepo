@@ -31,12 +31,12 @@ class ServerCommunication {
             storage = AcceptAllCookiesStorage()
         }
     }
-    suspend fun getOrders(): List<Payment> {
-        var response=client.get("https://lt-internal.el.r.appspot.com/orders")
-//        println(response.bodyAsText())
-        val payments: List<Payment> = Json.decodeFromString(response.bodyAsText())
-        return payments;
-    }
+//    suspend fun getOrders(): List<Payment> {
+//        var response=client.get("https://lt-internal.el.r.appspot.com/orders")
+////        println(response.bodyAsText())
+////        val payments: List<Payment> = Json.decodeFromString(response.bodyAsText())
+////        return payments;
+//    }
 
     suspend fun getUser(): String {
         println("trying to get user")

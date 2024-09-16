@@ -1,5 +1,7 @@
 package org.lifesparktech.lt_internal
 
+import com.google.api.client.json.webtoken.JsonWebToken.Payload
+import com.mongodb.kotlin.client.coroutine.MongoClient
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -9,8 +11,7 @@ import io.ktor.server.resources.Resources
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import io.ktor.server.sessions.Sessions
-import io.ktor.server.sessions.cookie
+import kotlinx.coroutines.flow.toList
 import kotlinx.serialization.json.Json
 
 
@@ -25,14 +26,29 @@ fun Application.module() {
             isLenient = true
         })
     }
-    configureDatabases()
+    val mongoDatabase = connectToMongoDB()
     configureAuthentication()
     install(Resources)
     routing {
         get("/") {
+            val collection= mongoDatabase.getCollection<RazorpayEvent>("razorpayEvents")
+            val events= collection.find().toList()
+            call.respond(events.toString())
 
+        //            mongoDatabase.
         }
 
     }
 }
 
+data class RazorpayEvent(
+    val id: String,
+    val entity: String,
+    val account_id: String,
+    val event: String,
+    val version: String,
+    val event_id: String,
+    val event_time: Long,
+    val webhook_id: String,
+    val payload: Payload
+)
