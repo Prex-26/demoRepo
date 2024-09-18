@@ -38,6 +38,8 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:$mongo_version")
 
 
+    implementation("org.mongodb:bson:5.1.4")
+
     implementation("org.mongodb:bson-kotlinx:$mongo_version")
 
 //    //Koin Dependency Injection

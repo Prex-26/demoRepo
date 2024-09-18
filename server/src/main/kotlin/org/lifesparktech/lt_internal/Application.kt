@@ -1,8 +1,9 @@
+
 package org.lifesparktech.lt_internal
 
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
-import com.mongodb.client.model.Updates
+import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -13,6 +14,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.get
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.toList
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -36,7 +38,7 @@ fun Application.module() {
     fun getRazorpayEventsCollection() = mongoDatabase.getCollection<RazorpayEvent>("razorpayEvents")
 
     routing {
-        route("/orders") {
+        route("") {
             get("/") {
                 val collection = getRazorpayEventsCollection()
                 val filter = Filters.eq(RazorpayEvent::status.name, "captured")
@@ -53,14 +55,14 @@ fun Application.module() {
                 call.respond(events)
             }
             get("/{id}") {
-                val id = call.parameters["id"]
+                val id = call.parameters["id"] ?: return@get call.respondText("Missing id", status = HttpStatusCode.BadRequest)
                 val collection = getRazorpayEventsCollection()
-                val filter = Filters.eq(RazorpayEvent::id.name, "$id")
-                val update = Updates.set(RazorpayEvent::status.name, "Cool")
-                collection.updateOne(filter, update)
-                call.respond("Updated")
+                val filter = Filters.eq("id", id)
+                val event = collection.find(filter).firstOrNull() ?: return@get call.respondText("Event not found", status = HttpStatusCode.NotFound)
+                call.respond(event)
             }
         }
+
     }
 }
 

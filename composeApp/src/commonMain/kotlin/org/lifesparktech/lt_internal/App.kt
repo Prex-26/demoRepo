@@ -38,14 +38,14 @@ fun Home(navController: NavHostController)
     val scope= rememberCoroutineScope()
 
     Button(onClick = {
-        extracted(scope)
+        Bluetooth(scope)
 //        flowCollector.
     }) {
         Text("New Orders")
     }
 }
 
-private fun extracted(scope: CoroutineScope) {
+private fun Bluetooth(scope: CoroutineScope) {
     val scanner = Scanner {
         filters = listOf(
             Filter.Service(uuidFrom("0000acf0-0000-1000-8000-00805f9b34fb"))
