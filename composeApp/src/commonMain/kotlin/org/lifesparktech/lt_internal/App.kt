@@ -10,12 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.benasher44.uuid.uuidFrom
-import com.juul.kable.Advertisement
 import com.juul.kable.Filter
 import com.juul.kable.Scanner
 import com.juul.kable.peripheral
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
