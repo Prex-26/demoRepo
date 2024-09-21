@@ -41,11 +41,3 @@ fun Application.module() {
 
 }
 
-@Serializable
-data class RazorpayEvent(
-    val id: String,
-    val email: String,
-    val contact: String,
-    val status: String,
-    val amount: Long
-)

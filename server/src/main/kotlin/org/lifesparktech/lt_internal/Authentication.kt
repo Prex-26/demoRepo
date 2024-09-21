@@ -41,13 +41,6 @@ fun Application.configureAuthentication() {
 
             }
         }
-        authenticate(optional = true) {
-            get("optional") {
-                val user = call.user
-                val response = if (user != null) "authenticated!" else "optional"
-                call.respond(response)
-            }
-        }
     }
 }
 

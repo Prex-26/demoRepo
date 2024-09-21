@@ -12,6 +12,11 @@ import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.toList
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import org.bson.codecs.pojo.annotations.BsonId
+import org.bson.types.ObjectId
 
 fun Application.configureRazorpay(mongoDatabase: MongoDatabase) {
     routing {
@@ -39,7 +44,16 @@ fun Application.configureRazorpay(mongoDatabase: MongoDatabase) {
                 call.respond(event)
             }
         }
-
     }
 }
+@Serializable
+data class RazorpayEvent(
+    @SerialName("_id")
+    @Contextual val id: ObjectId,
+    val email: String,
+    val contact: String,
+    val status: String,
+    val amount: Long
+)
+
 
