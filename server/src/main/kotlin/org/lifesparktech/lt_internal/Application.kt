@@ -18,11 +18,6 @@ fun main( args: Array<String>) {
 
 fun Application.module() {
     install(ContentNegotiation) {
-//        json(Json {
-//            prettyPrint = true
-//            isLenient = true
-//            ignoreUnknownKeys = true
-//        })
         gson {
             setDateFormat(DateFormat.LONG)
             setPrettyPrinting()

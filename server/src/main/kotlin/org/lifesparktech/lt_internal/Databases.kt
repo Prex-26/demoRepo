@@ -24,7 +24,6 @@ fun Application.connectToMongoDB(): MongoDatabase {
         .version(ServerApiVersion.V1)
         .build()
     val uri= System.getenv("ktor_mongo_uri")
-    println(uri)
     val mongoClientSettings = MongoClientSettings.builder()
         .applyConnectionString(ConnectionString(uri))
         .serverApi(serverApi)
