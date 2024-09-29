@@ -1,6 +1,7 @@
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -12,7 +13,7 @@ plugins {
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class) wasmJs {
+    wasmJs {
         browser {
             val projectDirPath = project.projectDir.path
             commonWebpackConfig {
@@ -40,14 +41,14 @@ kotlin {
 
     sourceSets {
         jvmMain.dependencies {
-            implementation("io.ktor:ktor-client-cio:3.0.0-beta-2")
+            implementation(libs.ktor.client.cio)
         }
         commonMain.dependencies {
-            implementation("io.ktor:ktor-client-auth:3.0.0-beta-2")
+            implementation(libs.ktor.client.auth)
             implementation(libs.ktor.client.core)
-            implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.0-beta-2")
-            implementation("io.ktor:ktor-client-content-negotiation:3.0.0-beta-2")
-            implementation("io.ktor:ktor-client-resources:3.0.0-beta-2")
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.resources)
         }
     }
 }
