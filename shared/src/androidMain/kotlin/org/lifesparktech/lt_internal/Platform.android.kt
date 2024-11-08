@@ -9,9 +9,9 @@ class AndroidPlatform : Platform {
 //        process.waitFor()
         return "This cannot be performed on Android"
     }
-    override suspend fun handleAuthentication(): String {
-        return "This cannot be performed on Android"
-    }
+//    override suspend fun handleAuthentication(): String {
+//        return "This cannot be performed on Android"
+//    }
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
