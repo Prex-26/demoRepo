@@ -31,36 +31,3 @@ fun App() {
 //        OrdersView()
     }
 }
-@Composable
-@Preview
-fun Home(navController: NavHostController)
-{
-    val scope= rememberCoroutineScope()
-
-    Button(onClick = {
-        Bluetooth(scope)
-//        flowCollector.
-    }) {
-        Text("New Orders")
-    }
-}
-
-private fun Bluetooth(scope: CoroutineScope) {
-    val scanner = Scanner {
-        filters = listOf(
-            Filter.Service(uuidFrom("0000acf0-0000-1000-8000-00805f9b34fb"))
-        )
-    }
-    scope.launch {
-        val advertisement = scanner.advertisements.onEach { advertisement ->
-            println(advertisement)
-        }.first()
-        val peripheral = scope.peripheral(advertisement)
-        peripheral.connect()
-        val service = peripheral.services?.first()
-        service?.characteristics?.forEach {
-            println(it)
-        }
-//            peripheral.disconnect()
-    }
-}

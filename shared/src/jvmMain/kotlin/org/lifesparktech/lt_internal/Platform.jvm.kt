@@ -2,7 +2,7 @@ package org.lifesparktech.lt_internal
 
 class JVMPlatform: Platform {
     override val name: String = "Java ${System.getProperty("java.version")}"
-    override suspend fun handleAuthentication(): String {
+    suspend fun handleAuthentication(): String {
         TODO("Not yet implemented")
     }
 }
